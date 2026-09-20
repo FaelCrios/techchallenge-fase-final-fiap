@@ -2,7 +2,7 @@ package br.com.fiap.filacerta.waitlist.domain;
 
 public enum ClinicalPriority {
     LOW,
-    MEDIUM,
+    NORMAL,
     HIGH,
     VERY_HIGH
 }

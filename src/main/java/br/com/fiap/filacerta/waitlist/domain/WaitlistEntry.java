@@ -2,6 +2,7 @@ package br.com.fiap.filacerta.waitlist.domain;
 
 import br.com.fiap.filacerta.healthunit.domain.HealthUnit;
 import br.com.fiap.filacerta.patient.domain.Patient;
+import br.com.fiap.filacerta.shared.exception.BusinessException;
 import br.com.fiap.filacerta.specialty.domain.Specialty;
 import jakarta.persistence.*;
 
@@ -86,6 +87,27 @@ public class WaitlistEntry {
         this.preferredPeriod = preferredPeriod;
         this.status = WaitlistStatus.WAITING;
         this.enteredAt = OffsetDateTime.now(ZoneOffset.UTC);
+    }
+
+    public void markAsOffered(){
+        if(this.status != WaitlistStatus.WAITING){
+            throw new BusinessException("O paciente não está aguardando nesta fila");
+        }
+        this.status = WaitlistStatus.OFFERED;
+    }
+
+    public void markAsScheduled() {
+        if (this.status != WaitlistStatus.OFFERED) {
+            throw new BusinessException("O paciente não possui uma oferta pendente");
+        }
+        this.status = WaitlistStatus.SCHEDULED;
+    }
+
+    public void returnToWaiting() {
+        if (this.status != WaitlistStatus.OFFERED) {
+            throw new BusinessException("O paciente não possui uma oferta pendente");
+        }
+        this.status = WaitlistStatus.WAITING;
     }
 
     public UUID getId() {
