@@ -100,24 +100,26 @@ public class SlotOfferService {
         return SlotOfferResponse.from(offer);
     }
 
+
     @Transactional
-    public SlotOfferResponse acceptOffer(UUID token){
-        SlotOffer offer = findOfferForUpdate(token);
+    public SlotOfferResponse acceptOffer(UUID token) {
+        SlotOffer offer = findOfferWithLocks(token);
+        validateOfferIsPending(offer);
         AppointmentSlot slot = offer.getAppointmentSlot();
         WaitlistEntry entry = offer.getWaitlistEntry();
-        validateOfferIsPending(offer);
         offer.accept(clock);
         slot.markAsBooked();
         entry.markAsScheduled();
         return SlotOfferResponse.from(offer);
     }
 
+
     @Transactional
     public SlotOfferResponse rejectOffer(UUID token) {
-        SlotOffer offer = findOfferForUpdate(token);
+        SlotOffer offer = findOfferWithLocks(token);
+        validateOfferIsPending(offer);
         AppointmentSlot slot = offer.getAppointmentSlot();
         WaitlistEntry entry = offer.getWaitlistEntry();
-        validateOfferIsPending(offer);
         offer.reject(clock);
         slot.release();
         entry.returnToWaiting();
@@ -134,6 +136,34 @@ public class SlotOfferService {
         if (offer.getStatus() != SlotOfferStatus.PENDING) {
             throw new BusinessException("A oferta não está pendente");
         }
+    }
+
+
+
+    private SlotOffer findOfferWithLocks(UUID token) {
+        UUID slotId = slotOfferRepository
+                .findSlotIdByToken(token)
+                .orElseThrow(() -> new NotFoundException("Oferta não encontrada")
+                );
+
+        appointmentSlotRepository
+                .findByIdForUpdate(slotId)
+                .orElseThrow(() -> new NotFoundException("Vaga não encontrada: " + slotId)
+                );
+
+        SlotOffer offer = slotOfferRepository
+                .findByTokenForUpdate(token)
+                .orElseThrow(() -> new NotFoundException("Oferta não encontrada")
+                );
+
+        UUID entryId = offer.getWaitlistEntry().getId();
+
+        waitlistEntryRepository
+                .findByIdForUpdate(entryId)
+                .orElseThrow(() -> new NotFoundException("Entrada da fila não encontrada: " + entryId)
+                );
+
+        return offer;
     }
 
 }

@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="fila-certa-sus (1)" />
-        <module name="fila-certa-sus" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fila-certa-sus" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

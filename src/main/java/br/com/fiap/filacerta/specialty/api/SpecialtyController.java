@@ -32,6 +32,7 @@ public class SpecialtyController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping
     public ResponseEntity<List<SpecialtyResponse>> findAll() {
         List<SpecialtyResponse> response = specialtyService.findAll();
         return ResponseEntity.ok(response);

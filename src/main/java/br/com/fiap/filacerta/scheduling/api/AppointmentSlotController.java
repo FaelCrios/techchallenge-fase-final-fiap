@@ -31,6 +31,7 @@ public class AppointmentSlotController {
         return ResponseEntity.ok(appointmentSlotService.findById(id));
     }
 
+    @GetMapping
     public ResponseEntity<List<AppointmentSlotResponse>> findAll(){
         return ResponseEntity.ok(appointmentSlotService.findAll());
     }

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -45,24 +46,29 @@ public class SlotOffer {
     protected SlotOffer() {
     }
 
+
     public SlotOffer(
             AppointmentSlot appointmentSlot,
             WaitlistEntry waitlistEntry,
             Clock clock
     ) {
+        this.appointmentSlot = Objects.requireNonNull(appointmentSlot, "A vaga é obrigatória");
+
+        this.waitlistEntry = Objects.requireNonNull(waitlistEntry, "A entrada da fila é obrigatória");
+
+        Objects.requireNonNull(clock, "O relógio é obrigatório");
+
         OffsetDateTime now = OffsetDateTime.now(clock);
 
         this.id = UUID.randomUUID();
         this.token = UUID.randomUUID();
 
-        this.appointmentSlot = appointmentSlot;
-        this.waitlistEntry = waitlistEntry;
-
         this.status = SlotOfferStatus.PENDING;
 
         this.offeredAt = now;
-        this.expiresAt =
-                now.plusMinutes(EXPIRATION_MINUTES);
+        this.expiresAt = now.plusMinutes(EXPIRATION_MINUTES);
+
+        this.respondedAt = null;
     }
 
     public void accept(Clock clock){

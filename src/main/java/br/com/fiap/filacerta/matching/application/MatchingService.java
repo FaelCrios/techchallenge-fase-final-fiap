@@ -62,7 +62,7 @@ public class MatchingService {
                         );
 
         return entries.stream()
-                .filter(entry -> !hasRejectedSlot(
+                .filter(entry -> !hasPreviousUnsuccessfulOffer(
                         slot.getId(),
                         entry.getId()
                 ))
@@ -154,12 +154,15 @@ public class MatchingService {
                 );
     }
 
-    private boolean hasRejectedSlot(UUID slotId, UUID waitlistEntryId){
-        return slotOfferRepository.existsByAppointmentSlotIdAndWaitlistEntryIdAndStatus(
-                slotId,
-                waitlistEntryId,
-                SlotOfferStatus.REJECTED
-        );
+    private boolean hasPreviousUnsuccessfulOffer(UUID slotId, UUID waitlistEntryId) {
+        return slotOfferRepository.existsByAppointmentSlotIdAndWaitlistEntryIdAndStatusIn(
+                        slotId,
+                        waitlistEntryId,
+                        List.of(
+                                SlotOfferStatus.REJECTED,
+                                SlotOfferStatus.EXPIRED
+                        )
+                );
     }
 
     private MatchingCandidateResponse toResponse(RankedCandidate candidate) {

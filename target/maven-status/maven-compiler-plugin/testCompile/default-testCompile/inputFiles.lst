@@ -1,2 +1,12 @@
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\config\MutableClockTestConfig.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\config\PostgresTestContainerConfig.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\healthunit\application\HealthUnitServiceTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\integration\PostgresIntegrationTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\matching\application\MatchingServiceTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\offer\application\SlotOfferExpirationSchedulerTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\offer\application\SlotOfferExpirationServiceTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\offer\domain\SlotOfferTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\offer\integration\SlotOfferIntegration.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\status\api\StatusControllerTest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\support\MutableClock.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\test\java\br\com\fiap\filacerta\support\SlotLockTestHelper.java
