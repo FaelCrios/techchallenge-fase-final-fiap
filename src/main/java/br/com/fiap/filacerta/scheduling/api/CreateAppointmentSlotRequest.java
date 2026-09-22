@@ -14,6 +14,9 @@ public record CreateAppointmentSlotRequest(
         @NotNull(message = "A especialidade é obrigatória")
         UUID specialtyId,
 
+        @NotNull(message = "O profissional é obrigatório")
+        UUID professionalId,
+
         @NotNull(message = "A data e horário da vaga são obrigatórios")
         @Future(message = "A vaga deve possuir uma data futura")
         OffsetDateTime scheduledAt

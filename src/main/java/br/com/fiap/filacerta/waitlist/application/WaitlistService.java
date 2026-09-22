@@ -22,6 +22,13 @@ import java.util.UUID;
 @Service
 public class WaitlistService {
 
+    private static final List<WaitlistStatus> BLOCKING_STATUSES =
+            List.of(
+                    WaitlistStatus.WAITING,
+                    WaitlistStatus.OFFERED,
+                    WaitlistStatus.SCHEDULED
+            );
+
     private final WaitlistEntryRepository waitlistEntryRepository;
     private final PatientRepository patientRepository;
     private final HealthUnitRepository healthUnitRepository;
@@ -43,15 +50,13 @@ public class WaitlistService {
     public WaitlistEntryResponse create(
             CreateWaitlistEntryRequest request
     ) {
-        Patient patient = findPatient(request.patientId());
+        Patient patient = findPatientForUpdate(request.patientId());
 
-        HealthUnit healthUnit =
-                findHealthUnit(request.healthUnitId());
+        HealthUnit healthUnit = findHealthUnit(request.healthUnitId());
 
-        Specialty specialty =
-                findSpecialty(request.specialtyId());
+        Specialty specialty = findSpecialty(request.specialtyId());
 
-        validatePatientIsNotAlreadyWaiting(
+        validatePatientIsNotAlreadyRegistered(
                 patient.getId(),
                 healthUnit.getId(),
                 specialty.getId()
@@ -90,46 +95,42 @@ public class WaitlistService {
                 .toList();
     }
 
-    private Patient findPatient(UUID patientId) {
-        return patientRepository.findById(patientId)
-                .orElseThrow(() -> new NotFoundException(
-                        "Paciente não encontrado: " + patientId
-                ));
+    private Patient findPatientForUpdate(UUID patientId) {
+
+        return patientRepository
+                .findByIdForUpdate(patientId)
+                .orElseThrow(() -> new NotFoundException("Paciente não encontrado: " + patientId));
     }
 
     private HealthUnit findHealthUnit(UUID healthUnitId) {
         return healthUnitRepository.findById(healthUnitId)
-                .orElseThrow(() -> new NotFoundException(
-                        "Unidade de saúde não encontrada: " + healthUnitId
-                ));
+                .orElseThrow(() -> new NotFoundException("Unidade de saúde não encontrada: " + healthUnitId));
     }
 
     private Specialty findSpecialty(UUID specialtyId) {
         return specialtyRepository.findById(specialtyId)
-                .orElseThrow(() -> new NotFoundException(
-                        "Especialidade não encontrada: " + specialtyId
-                ));
+                .orElseThrow(() -> new NotFoundException("Especialidade não encontrada: " + specialtyId));
     }
 
-    private void validatePatientIsNotAlreadyWaiting(
+    private void validatePatientIsNotAlreadyRegistered(
             UUID patientId,
             UUID healthUnitId,
             UUID specialtyId
     ) {
-        boolean alreadyWaiting =
+        boolean alreadyRegistered =
                 waitlistEntryRepository
-                        .existsByPatientIdAndHealthUnitIdAndSpecialtyIdAndStatus(
+                        .existsByPatientIdAndHealthUnitIdAndSpecialtyIdAndStatusIn(
                                 patientId,
                                 healthUnitId,
                                 specialtyId,
-                                WaitlistStatus.WAITING
+                                BLOCKING_STATUSES
                         );
+        if (alreadyRegistered) {
 
-        if (alreadyWaiting) {
             throw new ConflictException(
-                    "O paciente já está aguardando nesta fila"
+                    "O paciente já possui uma entrada ativa "
+                            + "ou uma consulta agendada nesta fila"
             );
         }
     }
-
 }
