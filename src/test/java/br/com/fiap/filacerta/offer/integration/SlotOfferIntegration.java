@@ -12,6 +12,8 @@ import br.com.fiap.filacerta.offer.domain.SlotOfferStatus;
 import br.com.fiap.filacerta.offer.infrastructure.SlotOfferRepository;
 import br.com.fiap.filacerta.patient.domain.Patient;
 import br.com.fiap.filacerta.patient.infrastructure.PatientRepository;
+import br.com.fiap.filacerta.professional.domain.HealthProfessional;
+import br.com.fiap.filacerta.professional.infrastructure.HealthProfessionalRepository;
 import br.com.fiap.filacerta.scheduling.domain.AppointmentSlot;
 import br.com.fiap.filacerta.scheduling.domain.AppointmentSlotStatus;
 import br.com.fiap.filacerta.scheduling.infrastructure.AppointmentSlotRepository;
@@ -74,6 +76,9 @@ class SlotOfferIntegrationTest {
     private PatientRepository patientRepository;
 
     @Autowired
+    private HealthProfessionalRepository professionalRepository;
+
+    @Autowired
     private SlotOfferExpirationService expirationService;
 
     @Autowired
@@ -113,6 +118,16 @@ class SlotOfferIntegrationTest {
                 )
         );
 
+        HealthProfessional professional =
+                professionalRepository.save(
+                        new HealthProfessional(
+                                "Dr. Teste Integração",
+                                randomCode("CRM-"),
+                                healthUnit,
+                                specialty
+                        )
+                );
+
         maria = patientRepository.save(
                 new Patient(
                         randomCode("SUS-"),
@@ -151,6 +166,7 @@ class SlotOfferIntegrationTest {
                 new AppointmentSlot(
                         healthUnit,
                         specialty,
+                        professional,
                         OffsetDateTime.now(ZoneOffset.UTC)
                                 .plusDays(7)
                 )

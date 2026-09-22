@@ -22,6 +22,12 @@ C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\b
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\patient\application\PatientService.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\patient\domain\Patient.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\patient\infrastructure\PatientRepository.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\api\CreateHealthProfessionalRequest.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\api\HealthProfessionalController.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\api\HealthProfessionalResponse.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\application\HealthProfessionalService.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\domain\HealthProfessional.java
+C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\professional\infrastructure\HealthProfessionalRepository.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\scheduling\api\AppointmentSlotController.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\scheduling\api\AppointmentSlotResponse.java
 C:\projeto-fiap\tech-challenge\techchallengefinal\fila-certa-sus\src\main\java\br\com\fiap\filacerta\scheduling\api\CreateAppointmentSlotRequest.java

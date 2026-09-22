@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -95,8 +96,13 @@ public class MatchingService {
         }
     }
 
+
     private PreferredPeriod resolveSlotPeriod(OffsetDateTime scheduledAt) {
-        int hour = scheduledAt.getHour();
+
+        ZoneId zone = ZoneId.of("America/Sao_Paulo");
+        int hour = scheduledAt
+                .atZoneSameInstant(zone)
+                .getHour();
 
         if (hour < 12) {
             return PreferredPeriod.MORNING;

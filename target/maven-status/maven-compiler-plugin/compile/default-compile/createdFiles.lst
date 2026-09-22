@@ -5,7 +5,9 @@ br\com\fiap\filacerta\patient\api\PatientResponse.class
 br\com\fiap\filacerta\waitlist\domain\WaitlistStatus.class
 br\com\fiap\filacerta\shared\exception\ApiError.class
 br\com\fiap\filacerta\matching\api\MatchingCandidateResponse.class
+br\com\fiap\filacerta\professional\domain\HealthProfessional.class
 br\com\fiap\filacerta\patient\domain\Patient.class
+br\com\fiap\filacerta\professional\api\HealthProfessionalController.class
 br\com\fiap\filacerta\specialty\infrastructure\SpecialtyRepository.class
 br\com\fiap\filacerta\scheduling\api\AppointmentSlotResponse.class
 br\com\fiap\filacerta\matching\application\MatchingService$1.class
@@ -17,12 +19,14 @@ br\com\fiap\filacerta\scheduling\application\AppointmentSlotService.class
 br\com\fiap\filacerta\FilaCertaSusApplication.class
 br\com\fiap\filacerta\offer\api\SlotOfferController.class
 br\com\fiap\filacerta\waitlist\api\WaitlistEntryResponse.class
+br\com\fiap\filacerta\professional\api\HealthProfessionalResponse.class
 br\com\fiap\filacerta\shared\exception\GlobalExceptionHandler.class
 br\com\fiap\filacerta\matching\application\MatchingService$RankedCandidate.class
 br\com\fiap\filacerta\specialty\api\SpecialtyController.class
 br\com\fiap\filacerta\offer\api\SlotOfferResponse.class
 br\com\fiap\filacerta\waitlist\domain\ClinicalPriority.class
 br\com\fiap\filacerta\shared\config\OpenApiConfig.class
+br\com\fiap\filacerta\professional\infrastructure\HealthProfessionalRepository.class
 br\com\fiap\filacerta\status\api\StatusController.class
 br\com\fiap\filacerta\offer\domain\SlotOfferStatus.class
 br\com\fiap\filacerta\healthunit\api\HealthUnitController.class
@@ -42,6 +46,8 @@ br\com\fiap\filacerta\scheduling\api\CreateAppointmentSlotRequest.class
 br\com\fiap\filacerta\waitlist\infrastructure\WaitlistEntryRepository.class
 br\com\fiap\filacerta\matching\application\MatchingService.class
 br\com\fiap\filacerta\status\api\StatusResponse.class
+br\com\fiap\filacerta\professional\api\CreateHealthProfessionalRequest.class
+br\com\fiap\filacerta\professional\application\HealthProfessionalService.class
 br\com\fiap\filacerta\matching\api\MatchingController.class
 br\com\fiap\filacerta\scheduling\infrastructure\AppointmentSlotRepository.class
 br\com\fiap\filacerta\shared\exception\NotFoundException.class
