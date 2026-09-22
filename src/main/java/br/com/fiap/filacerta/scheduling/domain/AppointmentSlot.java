@@ -69,7 +69,7 @@ public class AppointmentSlot {
 
     public void markAsOffered(){
         if(this.status != AppointmentSlotStatus.AVAILABLE){
-            throw new BusinessException("A vaga está disponível para oferta");
+            throw new BusinessException("A vaga não está disponível para oferta");
         }
         this.status = AppointmentSlotStatus.OFFERED;
     }
